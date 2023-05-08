@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/08 19:05:11 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 22:24:47 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			format++;
 			flags = flag_check(format);
 			while (*format && !is_placeholder(format))
 				format++;
 			if (*format)
-				len += handle_placeholders(format, args, flags);
+				len += format_specifier(format, args, flags);
 		}
 		else
 		{
@@ -60,4 +59,23 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return (len);
+}
+
+int main() {
+    int len;
+
+    len = ft_printf("Testing %3c %3c %3c %3c\n", 'A', 'B', 'C', 'D');
+    printf("Length: %d\n", len);
+
+/*     len = ft_printf("Testing %5c\n", 'B');
+    printf("Length: %d\n", len); */
+
+	printf ("--------------------------\n");
+	len = printf("Testing %3c %3c %3c %3c\n", 'A', 'B', 'C', 'D');
+    printf("Length: %d\n", len);
+
+/*     len = printf("Testing %5c\n", 'B');
+    printf("Length: %d\n", len); */
+
+    return 0;
 }

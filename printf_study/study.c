@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:33:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/07 22:27:22 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 22:22:06 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int main (void)
 
 	float d = 0.1;
 //	char c[] = "Estudar";
-	printf("%%-c: |%.9f| \n", d);
+	printf("%%c: |%.9f| \n", d);
 /* 	printf("%%2c: |%2c| \n", c);
 	printf("%%#x: %#x \n", x);
 	printf("%% d: % d \n", d);

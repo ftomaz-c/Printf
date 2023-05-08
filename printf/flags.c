@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:22:30 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/08 19:05:14 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 22:24:50 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ char	minus_flag (const char *format)
 {
 	char	c;
 
-	c = ' ';
+	if (*format == '-')
+		c = ' ';
 	return(c);
 }
 
@@ -39,7 +40,8 @@ char	zero_flag (const char *format)
 {
 	char	c;
 
-	c = '0';
+	if (*format == '-')
+		c = '0';
 	return(c);
 }
 

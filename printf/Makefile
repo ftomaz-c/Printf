@@ -6,7 +6,7 @@
 #    By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 12:25:40 by ftomaz-c          #+#    #+#              #
-#    Updated: 2023/05/08 19:05:15 by ftomaz-c         ###   ########.fr        #
+#    Updated: 2023/05/08 22:24:55 by ftomaz-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ OBJ = $(SRC:.c=.o)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
-
 $(NAME): $(OBJ)
 	$(MAKE) -C libft
 	$(LIB_CMD) $(NAME) $(OBJ) libft/*.o

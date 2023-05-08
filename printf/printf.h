@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 12:19:43 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/08 19:05:09 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 22:24:46 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int			precision_flag(const char *format);
 char		*alternative_form(const char *format);
 int			ft_printf(const char *format, ...);
 char		is_placeholder(const char *format);
-int			handle_placeholder(const char *format, va_list args, flag_data *flags)
+int			format_specifier(const char *format, va_list args, flag_data *flags);
 
 
 #endif
