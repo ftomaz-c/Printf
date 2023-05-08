@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/07 17:05:31 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:05:11 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,35 @@ necessary.
 
 #include "printf.h"
 
-int ft_printf(const char *format, ...)
+
+int	ft_printf(const char *format, ...)
 {
-    int flags;
+	flag_data	*flags;
+	int			len;
+	va_list		args;
 
-    if (!format)
-        return 0;
-    flags = flag_check(format);
-
-    printf("ft_printf:\n");
-    printf("Format: %s\n", format);
-    printf("Flags: %u\n", flags);
-    printf("------------------------------\n");
-
-    return 0;
-}
-
-int main()
-{
-    const char *format = "%+";
-    int flags = flag_check(format);
-
-    printf("Flags:\n");
-    printf("Format: %s\n", format);
-    printf("Flags: %u\n", flags);
-    printf("------------------------------\n");
-
-    ft_printf(format);
-
-    return 0;
+	len = 0;
+	if (!format)
+		return (len);
+	va_start (args, format);
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			flags = flag_check(format);
+			while (*format && !is_placeholder(format))
+				format++;
+			if (*format)
+				len += handle_placeholders(format, args, flags);
+		}
+		else
+		{
+			ft_putchar_fd(*format, 1);
+			len++;
+		}
+		format++;
+	}
+	va_end(args);
+	return (len);
 }

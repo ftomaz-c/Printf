@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 12:19:43 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/07 17:11:25 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:05:09 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,26 @@
 # include <stdio.h>
 # include "libft/libft.h"
 
-typedef enum {
-    FLAG_NONE = 0,
-    FLAG_MINUS = 1,
-    FLAG_ZERO = 2,
-    FLAG_DOT = 3,
-    FLAG_HASH = 4,
-    FLAG_SPACE = 5,
-    FLAG_PLUS = 6
-} Flag;
+typedef struct
+{
+    char	minus_flag;
+	char	zero_flag;
+	int		width_flag;
+    int		precision_flag;
+	char	*alternative_form;
+	char	space;
+	char	plus;
+} flag_data;
 
-Flag flag_check(const char *format);
+flag_data	*flag_check(const char *format);
+char		minus_flag (const char *format);
+char		zero_flag (const char *format);
+int			width_flag (const char *format);
+int			precision_flag(const char *format);
+char		*alternative_form(const char *format);
+int			ft_printf(const char *format, ...);
+char		is_placeholder(const char *format);
+int			handle_placeholder(const char *format, va_list args, flag_data *flags)
+
 
 #endif
