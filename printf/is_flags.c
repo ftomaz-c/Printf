@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flags.c                                            :+:      :+:    :+:   */
+/*   is_flags.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:22:30 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/08 22:24:50 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:34:57 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int		width_flag (const char *format)
 {
@@ -27,29 +27,12 @@ int		width_flag (const char *format)
 	return(len);
 }
 
-char	minus_flag (const char *format)
-{
-	char	c;
-
-	if (*format == '-')
-		c = ' ';
-	return(c);
-}
-
-char	zero_flag (const char *format)
-{
-	char	c;
-
-	if (*format == '-')
-		c = '0';
-	return(c);
-}
-
 int		precision_flag(const char *format)
 {
 	int		len;
 
 	len = 0;
+	format++;
 	while (*format >= '0' && *format <= '9')
 	{
 		len = len * 10 + (*format - '0');

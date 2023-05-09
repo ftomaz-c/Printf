@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:52:54 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/08 22:24:49 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:34:42 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,30 @@
 	The '-' flag cancels the '0' flag.
 	The '+' flag cancels the ' ' (space) flag. */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 static void	flag_check1(const char *format, flag_data *flags)
 {
 	if(*format == '-')
 	{
-		flags->minus_flag = minus_flag(format);
+		flags->minus_flag = 1;
 		format++;
-		if (*format > '0' && *format < '9')
+		if (*format >= '0' && *format <= '9')
 		{
 			flags->width_flag = width_flag(format);
+			while (*format >= '0' && *format <= '9')
+				format++;
 		}
 	}
-	else if (*format == '0')
+	if (*format == '0')
 	{
-		flags->zero_flag = zero_flag(format);
-		if (*format > '0' && *format < '9')
-		{
-			flags->width_flag = width_flag(format);
-		}
+		flags->zero_flag = 1;
+		format++;
 	}
-	else if(*format == '.')
+	if(*format == '.')
 	{
 		flags->precision_flag = precision_flag(format);
+		format++;
 		while (*format > '0' && *format < '9' && *format == '.')
 			format++;
 	}
@@ -55,13 +55,12 @@ static void	flag_check2(const char *format, flag_data *flags)
 	if (*format == '#')
 	{
 		flags->alternative_form = alternative_form(format);
-		format++;
 	}
-	else if(*format == ' ')
+	if(*format == ' ')
 	{
 		flags->space = ' ';
 	}
-	else if(*format == '+')
+	if(*format == '+')
 	{
 		flags->plus = '+';
 	}
@@ -71,14 +70,18 @@ flag_data	*flag_check(const char *format)
 {
 	flag_data	*flags;
 
-	if(!format)
-		return (NULL);
-	flags = calloc(1, sizeof(flag_data));
-	if (!flags)
+	flags = ft_calloc(1, sizeof(flag_data));
+	if (!flags || !format)
 		return (NULL);
 	if(*format == '%')
 	{
 		format++;
+		if (*format >= '0' && *format <= '9')
+		{
+			flags->width_flag = width_flag(format);
+			while (*format >= '0' && *format <= '9')
+				format++;
+		}
 		while(*format == '-' || *format == '0' || *format == '.'
 			||*format == '#' || *format == ' ' || *format == '+')
 		{
@@ -88,8 +91,6 @@ flag_data	*flag_check(const char *format)
 				flag_check2(format, flags);
 			format++;
 		}
-		if (*format >= '0' && *format <= '9')
-			flags->width_flag = width_flag(format);
 	}
 	return (flags);
 }

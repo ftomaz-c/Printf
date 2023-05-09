@@ -1,0 +1,32 @@
+errors
+
+error: too many arguments for format;
+error: expected expression before ')' token;
+
+%c:
+error: format '%s' expects a matching 'int' argument;
+error: format '%c' expects argument of type 'int';
+error: precision used with '%c';
+error: '0' flag used with '%c';
+error: ' ' flag used with '%c';
+error: '+' flag used with '%c';
+error: '#' flag used with '%c';
+
+
+%s:
+error: format '%s' expects a matching 'char *' argument;
+error: format '%s' expects argument of type 'char *';
+error: '0' flag used with '%s';
+error: ' ' flag used with '%s';
+error: '+' flag used with '%s';
+error: '#' flag used with '%s';
+
+%p:
+error: format '%p' expects argument of type 'void *';
+error: precision used with '%p':
+error: '0' flag used with '%p';
+error: ' ' flag used with '%p';
+error: '+' flag used with '%p';
+error: '#' flag used with '%p';
+
+

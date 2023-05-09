@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.c                                           :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/08 22:24:47 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:17:47 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ occurrences of % signs with flags and placeholders. Repeat steps 2-6 as
 necessary.
 */
 
-#include "printf.h"
-
+#include "ft_printf.h"
 
 int	ft_printf(const char *format, ...)
 {
@@ -45,6 +44,9 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			flags = flag_check(format);
+			printf("> minus flag\t: %d\n", flags->minus_flag);
+			printf("> width flag\t: %d\n", flags->width_flag);
+			printf("> precision flag: %d\n\n", flags->precision_flag);
 			while (*format && !is_placeholder(format))
 				format++;
 			if (*format)
@@ -61,21 +63,19 @@ int	ft_printf(const char *format, ...)
 	return (len);
 }
 
-int main() {
-    int len;
+/* int main()
+{
+	int		len;
+	char	*p;
 
-    len = ft_printf("Testing %3c %3c %3c %3c\n", 'A', 'B', 'C', 'D');
-    printf("Length: %d\n", len);
+	p = "string";
+	ft_printf("\nTesting ft_printf:\n\n");
+	len = ft_printf("%16p|\n ", p);
+	printf ("Length: %d\n", len);
+	printf ("\n--------------------------\n");
+	printf("\nTesting printf:\n\n");
+	len = printf("%16p|\n ", p);
+	printf("Length: %d\n\n", len);
 
-/*     len = ft_printf("Testing %5c\n", 'B');
-    printf("Length: %d\n", len); */
-
-	printf ("--------------------------\n");
-	len = printf("Testing %3c %3c %3c %3c\n", 'A', 'B', 'C', 'D');
-    printf("Length: %d\n", len);
-
-/*     len = printf("Testing %5c\n", 'B');
-    printf("Length: %d\n", len); */
-
-    return 0;
-}
+	return 0;
+} */
