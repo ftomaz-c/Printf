@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:52:54 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/09 18:34:42 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/10 21:19:05 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,71 +23,80 @@
 
 #include "ft_printf.h"
 
-static void	flag_check1(const char *format, flag_data *flags)
+static void	flag_check1(const char *format, t_flag_data *flags)
 {
-	if(*format == '-')
+	if (*format == '-')
 	{
 		flags->minus_flag = 1;
 		format++;
-		if (*format >= '0' && *format <= '9')
-		{
-			flags->width_flag = width_flag(format);
-			while (*format >= '0' && *format <= '9')
-				format++;
-		}
 	}
 	if (*format == '0')
 	{
 		flags->zero_flag = 1;
 		format++;
 	}
-	if(*format == '.')
+	if (*format == '.')
 	{
 		flags->precision_flag = precision_flag(format);
 		format++;
 		while (*format > '0' && *format < '9' && *format == '.')
 			format++;
 	}
+	if (*format >= '1' && *format <= '9')
+	{
+		flags->width_flag = width_flag(format);
+		while (*format >= '0' && *format <= '9')
+			format++;
+	}
 }
 
-static void	flag_check2(const char *format, flag_data *flags)
+static void	flag_check2(const char *format, t_flag_data *flags)
 {
 	if (*format == '#')
 	{
-		flags->alternative_form = alternative_form(format);
+		flags->alternative_form = 1;
+		format++;
 	}
-	if(*format == ' ')
+	if (*format == ' ')
 	{
-		flags->space = ' ';
+		flags->space_flag = 1;
+		format++;
 	}
-	if(*format == '+')
+	if (*format == '+')
 	{
-		flags->plus = '+';
+		flags->plus_flag = 1;
+		format++;
+	}
+	if (*format >= '0' && *format <= '9')
+	{
+		flags->width_flag = width_flag(format);
+		while (*format >= '0' && *format <= '9')
+			format++;
 	}
 }
 
-flag_data	*flag_check(const char *format)
+t_flag_data	*flag_check(const char *format)
 {
-	flag_data	*flags;
+	t_flag_data	*flags;
 
-	flags = ft_calloc(1, sizeof(flag_data));
+	flags = ft_calloc(1, sizeof(t_flag_data));
 	if (!flags || !format)
 		return (NULL);
-	if(*format == '%')
+	if (*format == '%')
 	{
 		format++;
-		if (*format >= '0' && *format <= '9')
+		if (*format >= '1' && *format <= '9')
 		{
 			flags->width_flag = width_flag(format);
 			while (*format >= '0' && *format <= '9')
 				format++;
 		}
-		while(*format == '-' || *format == '0' || *format == '.'
+		while (*format == '-' || *format == '0' || *format == '.'
 			||*format == '#' || *format == ' ' || *format == '+')
 		{
-			if(*format == '-' || *format == '0' || *format == '.')
+			if (*format == '-' || *format == '0' || *format == '.')
 				flag_check1(format, flags);
-			else if(*format == '#' || *format == ' ' || *format == '+')
+			else if (*format == '#' || *format == ' ' || *format == '+')
 				flag_check2(format, flags);
 			format++;
 		}

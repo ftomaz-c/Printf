@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/09 19:17:47 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 01:42:58 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ necessary.
 
 int	ft_printf(const char *format, ...)
 {
-	flag_data	*flags;
+	t_flag_data	*flags;
 	int			len;
 	va_list		args;
 
@@ -44,13 +44,18 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			flags = flag_check(format);
-			printf("> minus flag\t: %d\n", flags->minus_flag);
-			printf("> width flag\t: %d\n", flags->width_flag);
-			printf("> precision flag: %d\n\n", flags->precision_flag);
+			printf("\n\n> width flag\t\t: %d\n", flags->width_flag);
+			printf("> minus flag\t\t: %d\n", flags->minus_flag);
+			printf("> precision flag\t: %d\n", flags->precision_flag);
+			printf("> zero flag\t\t: %d\n", flags->zero_flag);
+			printf("> alternative_form flag\t: %d\n", flags->alternative_form);
+			printf("> space flag\t\t: %d\n", flags->space_flag);
+			printf("> plus flag\t\t: %d\n\n", flags->plus_flag);
 			while (*format && !is_placeholder(format))
 				format++;
 			if (*format)
-				len += format_specifier(format, args, flags);
+				len += format_spec(format, args, flags);
+			free (flags);
 		}
 		else
 		{
@@ -60,22 +65,53 @@ int	ft_printf(const char *format, ...)
 		format++;
 	}
 	va_end(args);
+	printf ("\n-------------------------\n\n");
 	return (len);
 }
 
-/* int main()
+int main()
 {
-	int		len;
-	char	*p;
+    int number = 42;
 
-	p = "string";
-	ft_printf("\nTesting ft_printf:\n\n");
-	len = ft_printf("%16p|\n ", p);
+    ft_printf("Number: %d|\n\n", number);
+    ft_printf("Number with width: %5d|\n\n", number);
+    ft_printf("Number with zero padding: %05d|\n\n", number);
+    ft_printf("Number with left alignment: %-5d|\n\n", number);
+    ft_printf("Number with plus flag: %+d|\n\n", number);
+    ft_printf("Number with space flag: % d|\n\n", number);
+    ft_printf("Number with precision: %.2d|\n\n", number);
+
+    int negative_number = -123;
+
+    ft_printf("Negative number: %d|\n\n", negative_number);
+    ft_printf("Negative number with width: %8d|\n\n", negative_number);
+    ft_printf("Negative number with zero padding: %010d|\n\n", negative_number);
+    ft_printf("Negative number with left alignment: %-8d|\n\n", negative_number);
+    ft_printf("Negative number with plus flag: %+d|\n\n", negative_number);
+    ft_printf("Negative number with space flag: % d|\n\n", negative_number);
+    ft_printf("Negative number with precision: %.3d|\n\n", negative_number);
+
+    int zero = 0;
+
+    ft_printf("Zero: %d|\n\n", zero);
+    ft_printf("Zero with width: %5d|\n\n", zero);
+    ft_printf("Zero with zero padding: %08d|\n\n", zero);
+    ft_printf("Zero with left alignment: %-5d|\n\n", zero);
+    ft_printf("Zero with plus flag: %+d|\n\n", zero);
+    ft_printf("Zero with space flag: % d|\n\n", zero);
+    ft_printf("Zero with precision: %.1d|\n\n", zero);
+
+/* 	int	len;
+	int	i;
+
+	i = 0;
+	ft_printf("\n\n\n\nTesting ft_printf:\n\n");
+	len = ft_printf("% i|\n", i);
 	printf ("Length: %d\n", len);
-	printf ("\n--------------------------\n");
+	printf ("\n-------------------------\n");
 	printf("\nTesting printf:\n\n");
-	len = printf("%16p|\n ", p);
+	len = printf("% i|\n", i);
 	printf("Length: %d\n\n", len);
-
-	return 0;
-} */
+*/
+	return (0);
+}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_placeholder.c                                   :+:      :+:    :+:   */
+/*   format_specifier.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:21:08 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/09 18:35:02 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/10 22:35:46 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,68 +15,29 @@
 char	is_placeholder(const char *format)
 {
 	if (*format == 'c' || *format == 's' || *format == 'p' || *format == 'd'
-	|| *format == 'i' || *format == 'u' || *format == 'x' || *format == 'X')
+		|| *format == 'i' || *format == 'u' || *format == 'x' || *format == 'X')
 		return (1);
 	return (0);
 }
 
-char	*is_width_flag(int len)
-{
-	char	*ptr;
-
-	ptr = ft_calloc(len + 1, sizeof(char));
-	if(!ptr)
-		return (NULL);
-	ft_memset(ptr, ' ', len);
-	return (ptr);
-}
-
-int		char_format(int c, flag_data *flags)
-{
-	char	*ptr;
-	int		len;
-
-	ptr = NULL;
-	len = flags->width_flag;
-	if (flags->width_flag > 0)
-	{
-		ptr = is_width_flag(flags->width_flag - 1);
-		if (flags->minus_flag == 0)
-		{
-			ft_putstr_fd(ptr, 1);
-			ft_putchar_fd(c, 1);
-		}
-		if (flags->minus_flag == 1)
-		{
-			ft_putchar_fd(c, 1);
-			ft_putstr_fd(ptr, 1);
-		}
-	}
-	else
-	{
-		ft_putchar_fd(c, 1);
-		len = 1;
-	}
-	return(len);
-}
-
-/*int		unsigned_format(int u, flag_data *flags)
+/*int		unsigned_format(int u, t_flag_data *flags)
 {}
 
-int		hex_format(char *hex, flag_data *flags)
+int		hex_format(char *hex, t_flag_data *flags)
 {} */
 
-int		format_specifier(const char *format, va_list args, flag_data *flags)
+int	format_spec(const char *format, va_list args, t_flag_data *flags)
 {
 	int				len;
 	char			c;
 	char			*s;
 	void			*ptr;
-/*	int				nbr;
-	unsigned int	u;
+	int				nbr;
+/*	unsigned int	u;
 	char			*hex; */
-
+	char			placeholder = *format;
 	len = 0;
+	printf("---- placeholder: %%%c ----\n", placeholder);
 	if (*format == 'c' )
 	{
 		c = va_arg(args, int);
@@ -92,12 +53,12 @@ int		format_specifier(const char *format, va_list args, flag_data *flags)
 		ptr = va_arg(args, void *);
 		len = ptr_format(ptr, flags);
 	}
-/*	if (*format == 'd' || *format == 'i')
+	if (*format == 'd' || *format == 'i')
 	{
 		nbr = va_arg(args, int);
 		len = nbr_format(nbr, flags);
 	}
-	if (*format == 'u')
+/*	if (*format == 'u')
 	{
 		u = va_arg(args, unsigned int);
 		len = unsigned_format(u, flags);
@@ -107,5 +68,6 @@ int		format_specifier(const char *format, va_list args, flag_data *flags)
 		hex = va_arg(args, char *);
 		len = hex_format(hex, flags);
 	} */
+	va_end(args);
 	return (len);
 }

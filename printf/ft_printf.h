@@ -6,44 +6,45 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 12:19:43 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/09 18:38:56 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:46:54 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdarg.h>
 # include <stdio.h>
 # include "libft/libft.h"
 
-typedef struct
+typedef struct t_flag_data
 {
-    char	minus_flag;
-	char	zero_flag;
-	int		width_flag;
-    int		precision_flag;
-	char	*alternative_form;
-	char	space;
-	char	plus;
-} flag_data;
+	int	minus_flag;
+	int	zero_flag;
+	int	width_flag;
+	int	precision_flag;
+	int	alternative_form;
+	int	space_flag;
+	int	plus_flag;
+}	t_flag_data;
 
 /* printf */
 int			ft_printf(const char *format, ...);
 
 /* flags */
-flag_data	*flag_check(const char *format);
-char		minus_flag (const char *format);
-char		zero_flag (const char *format);
-int			width_flag (const char *format);
+t_flag_data	*flag_check(const char *format);
+int			width_flag(const char *format);
 int			precision_flag(const char *format);
 char		*alternative_form(const char *format);
 
 /* formating */
 char		is_placeholder(const char *format);
 char		*is_width_flag(int len);
-int			format_specifier(const char *format, va_list args, flag_data *flags);
-int			str_format(char *s, flag_data *flags);
-int			ptr_format(void *ptr, flag_data *flags);
+int			format_spec(const char *format, va_list args, t_flag_data *flags);
+int			nbr_base_len(char *base, long long nbr);
+int			char_format(int c, t_flag_data *flags);
+int			str_format(char *s, t_flag_data *flags);
+int			ptr_format(void *ptr, t_flag_data *flags);
+int			nbr_format(int i, t_flag_data *flags);
 
 #endif

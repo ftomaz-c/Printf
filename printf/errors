@@ -1,3 +1,6 @@
+/*
+
+
 errors
 
 error: too many arguments for format;
@@ -29,4 +32,13 @@ error: ' ' flag used with '%p';
 error: '+' flag used with '%p';
 error: '#' flag used with '%p';
 
+%d:
+else if (flags->zero_flag && flags->minus_flag)
+	{
+		free(flags);
+		exit (write(1, "\033[31merror:\033[0m '0' flag ignored with '-' flag;\n\n", 50));
+	}
 
+	error: ' ' flag ignored with '+' flag
+
+*/
