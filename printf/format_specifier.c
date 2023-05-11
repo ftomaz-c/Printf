@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:21:08 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/10 22:35:46 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 02:18:41 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	format_spec(const char *format, va_list args, t_flag_data *flags)
 /*	unsigned int	u;
 	char			*hex; */
 	char			placeholder = *format;
-	len = 0;
 	printf("---- placeholder: %%%c ----\n", placeholder);
+	len = 0;
 	if (*format == 'c' )
 	{
 		c = va_arg(args, int);
