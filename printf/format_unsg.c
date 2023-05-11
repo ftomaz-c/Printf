@@ -6,13 +6,13 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:11:45 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/11 15:54:34 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:23:07 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	unbr_minus_zero_flags(int i, char *p, int wdth, t_flag_data *flags)
+static void	nbr_minus_zero_flags(int i, char *p, int wdth, t_flag_data *flags)
 {
 	if (i < 0 && flags->zero_flag)
 	{
@@ -37,7 +37,7 @@ static void	unbr_minus_zero_flags(int i, char *p, int wdth, t_flag_data *flags)
 	}
 }
 
-static void	unbr_zero_flag(char *new_ptr, char *p, int wdth, t_flag_data *flags)
+static void	nbr_zero_flag(char *new_ptr, char *p, int wdth, t_flag_data *flags)
 {
 	if (!flags->zero_flag && wdth > 0)
 	{
@@ -54,7 +54,7 @@ static void	unbr_zero_flag(char *new_ptr, char *p, int wdth, t_flag_data *flags)
 	free(new_ptr);
 }
 
-static void	unbr_plus_space_flags(int i, char *p, int wdth, t_flag_data *flags)
+static void	nbr_plus_space_flags(int i, char *p, int wdth, t_flag_data *flags)
 {
 	char	*new_ptr;
 
@@ -63,7 +63,7 @@ static void	unbr_plus_space_flags(int i, char *p, int wdth, t_flag_data *flags)
 	{
 		if (wdth > 0)
 		{
-			unbr_zero_flag(new_ptr, p, wdth, flags);
+			nbr_zero_flag(new_ptr, p, wdth, flags);
 		}
 		else if (wdth < 0)
 			ft_putchar_fd('+', 1);
@@ -121,13 +121,13 @@ int	unsigned_format(unsigned int i, t_flag_data *flags)
 		ptr = is_width_flag(width);
 	if ((flags->plus_flag || flags->space_flag) && (width - 1 > 0 || width < 0))
 	{
-		unbr_plus_space_flags(i, ptr, width, flags);
+		nbr_plus_space_flags(i, ptr, width, flags);
 		width--;
 		len++;
 	}
 	if (width > 0)
 	{
-		unbr_minus_zero_flags(i, ptr, width, flags);
+		nbr_minus_zero_flags(i, ptr, width, flags);
 		len += width;
 		free(ptr);
 	}

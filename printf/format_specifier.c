@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:21:08 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/11 15:29:58 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:32:24 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ char	is_placeholder(const char *format)
 	return (0);
 }
 
-/*int		hex_format(char *hex, t_flag_data *flags)
-{} */
-
 int	format_spec(const char *format, va_list args, t_flag_data *flags)
 {
 	int				len;
@@ -31,7 +28,7 @@ int	format_spec(const char *format, va_list args, t_flag_data *flags)
 	void			*ptr;
 	int				nbr;
 	unsigned int	u;
-/*	char			*hex; */
+	int				hex;
 /*	char			placeholder = *format;
  	printf("---- placeholder: %%%c ----\n\n", placeholder);
  */
@@ -68,10 +65,15 @@ int	format_spec(const char *format, va_list args, t_flag_data *flags)
 		u = va_arg(args, unsigned int);
 		len = unsigned_format(u, flags);
 	}
-/*	if (*format == 'x' || *format == 'X')
+	if (*format == 'x')
 	{
-		hex = va_arg(args, char *);
-		len = hex_format(hex, flags);
+		hex = va_arg(args, int);
+		len = hex_formatx(hex, flags);
+	}
+	/* if (*format == 'X')
+	{
+		hex = va_arg(args, int);
+		len = hex_formatX(hex, flags);
 	} */
 	va_end(args);
 	return (len);
