@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_nbr.c                                       :+:      :+:    :+:   */
+/*   format_unsg.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 19:15:00 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/11 15:49:24 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/05/11 15:11:45 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/05/11 15:54:34 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ static void	unbr_minus_zero_flags(int i, char *p, int wdth, t_flag_data *flags)
 	}
 	if (flags->minus_flag && !flags->zero_flag)
 	{
-		ft_putnbr_base_fd(i, "0123456789", 1);
+		ft_putunbr_fd(i, 1);
 		ft_putstr_fd(p, 1);
 	}
 	else if (!flags->minus_flag && flags->zero_flag)
 	{
 		ft_memset(p, '0', wdth);
 		ft_putstr_fd(p, 1);
-		ft_putnbr_base_fd(i, "0123456789", 1);
+		ft_putunbr_fd(i, 1);
 	}
 	else if (!flags->minus_flag && !flags->zero_flag)
 	{
 		ft_putstr_fd(p, 1);
-		ft_putnbr_base_fd(i, "0123456789", 1);
+		ft_putunbr_fd(i, 1);
 	}
 }
 
@@ -82,13 +82,40 @@ static void	unbr_plus_space_flags(int i, char *p, int wdth, t_flag_data *flags)
 	}
 }
 
-int	nbr_format(int i, t_flag_data *flags)
+static int	unbr_base_len(char *base, long long nbr)
+{
+	int	len;
+	int	base_len;
+
+	len = 0;
+	base_len = ft_strlen(base);
+	if (nbr == 0)
+		len++;
+	while (nbr != 0)
+	{
+		nbr /= base_len;
+		len++;
+	}
+	return (len);
+}
+
+void	ft_putunbr_fd(unsigned int n, int fd)
+{
+	if (n > 9)
+	{
+		ft_putunbr_fd(n / 10, fd);
+		n = n % 10;
+	}
+	ft_putchar_fd(n + '0', fd);
+}
+
+int	unsigned_format(unsigned int i, t_flag_data *flags)
 {
 	char	*ptr;
 	int		len;
 	int		width;
 
-	len = nbr_base_len("0123456789", i);
+	len = unbr_base_len("0123456789", i);
 	width = flags->width_flag - len;
 	if (width > 0)
 		ptr = is_width_flag(width);
@@ -105,6 +132,6 @@ int	nbr_format(int i, t_flag_data *flags)
 		free(ptr);
 	}
 	else
-		ft_putnbr_base_fd(i, "0123456789", 1);
+		ft_putunbr_fd(i, 1);
 	return (len);
 }

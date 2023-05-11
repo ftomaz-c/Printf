@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:58:47 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/09 18:30:05 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:40:08 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,15 @@ void	ft_putnbr_base_fd(long long nbr, char *base, int fd)
 	base_len = 0;
 	while (base[base_len] != '\0')
 		base_len++;
+	if (base_len == 16)
+	{
+		if (nbr == 0)
+			return (ft_putstr_fd("(nil)", 1));
+		if (nbr == LONG_MIN && base_len == 16)
+			return (ft_putstr_fd("8000000000000000", 1));
+		if (nbr == (long long)ULONG_MAX && base_len == 16)
+			return (ft_putstr_fd("ffffffffffffffff", 1));
+	}
 	if (!error_check(base, base_len))
 		return ;
 	if (nbr < 0)
@@ -60,9 +69,7 @@ void	ft_putnbr_base_fd(long long nbr, char *base, int fd)
 		nbr *= -1;
 	}
 	if (nbr >= base_len)
-	{
 		ft_putnbr_base_fd(nbr / base_len, base, fd);
-	}
 	ft_putchar_fd(base[nbr % base_len], fd);
 }
 

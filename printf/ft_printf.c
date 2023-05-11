@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/11 02:20:05 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:30:01 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,36 +41,36 @@ int	ft_printf(const char *format, ...)
 	va_start (args, format);
 	while (*format)
 	{
-		if(*format == '%' && *(format + 1) == '%')
+		if (*format == '%' && *(format + 1) == '%')
 		{
 			ft_putchar_fd('%', 1);
 			len++;
 			format += 2;
 		}
-		if(*format == '%' && *(format + 1) != '%')
+		if (*format == '%' && *(format + 1) != '%')
 		{
 			flags = flag_check(format);
-			printf("\n\n> width flag\t\t: %d\n", flags->width_flag);
+			/* printf("\n\n> width flag\t\t: %d\n", flags->width_flag);
 			printf("> minus flag\t\t: %d\n", flags->minus_flag);
 			printf("> precision flag\t: %d\n", flags->precision_flag);
 			printf("> zero flag\t\t: %d\n", flags->zero_flag);
 			printf("> alternative_form flag\t: %d\n", flags->alternative_form);
 			printf("> space flag\t\t: %d\n", flags->space_flag);
-			printf("> plus flag\t\t: %d\n\n", flags->plus_flag);
+			printf("> plus flag\t\t: %d\n\n", flags->plus_flag); */
 			while (*format && !is_placeholder(format))
 				format++;
 			if (*format)
 				len += format_spec(format, args, flags);
 			free (flags);
+			format++;
 		}
-		else
+		else if (*format && !(*format == '%'))
 		{
 			ft_putchar_fd(*format, 1);
 			len++;
+			format++;
 		}
-		format++;
 	}
 	va_end(args);
-	printf ("\n-------------------------\n\n");
 	return (len);
 }

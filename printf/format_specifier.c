@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:21:08 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/11 02:18:41 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:29:58 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ char	is_placeholder(const char *format)
 	return (0);
 }
 
-/*int		unsigned_format(int u, t_flag_data *flags)
-{}
-
-int		hex_format(char *hex, t_flag_data *flags)
+/*int		hex_format(char *hex, t_flag_data *flags)
 {} */
 
 int	format_spec(const char *format, va_list args, t_flag_data *flags)
@@ -33,11 +30,13 @@ int	format_spec(const char *format, va_list args, t_flag_data *flags)
 	char			*s;
 	void			*ptr;
 	int				nbr;
-/*	unsigned int	u;
-	char			*hex; */
-	char			placeholder = *format;
-	printf("---- placeholder: %%%c ----\n", placeholder);
+	unsigned int	u;
+/*	char			*hex; */
+/*	char			placeholder = *format;
+ 	printf("---- placeholder: %%%c ----\n\n", placeholder);
+ */
 	len = 0;
+	/*void error check	(format, args, flags) */
 	if (*format == 'c' )
 	{
 		c = va_arg(args, int);
@@ -46,6 +45,12 @@ int	format_spec(const char *format, va_list args, t_flag_data *flags)
 	if (*format == 's')
 	{
 		s = va_arg(args, char *);
+		if (s == NULL)
+		{
+			ft_putstr_fd("(null)", 1);
+			len += 6;
+			return (len);
+		}
 		len = str_format(s, flags);
 	}
 	if (*format == 'p')
@@ -58,12 +63,12 @@ int	format_spec(const char *format, va_list args, t_flag_data *flags)
 		nbr = va_arg(args, int);
 		len = nbr_format(nbr, flags);
 	}
-/*	if (*format == 'u')
+	if (*format == 'u')
 	{
 		u = va_arg(args, unsigned int);
 		len = unsigned_format(u, flags);
 	}
-	if (*format == 'x' || *format == 'X')
+/*	if (*format == 'x' || *format == 'X')
 	{
 		hex = va_arg(args, char *);
 		len = hex_format(hex, flags);

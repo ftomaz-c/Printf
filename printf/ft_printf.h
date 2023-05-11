@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 12:19:43 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/10 19:46:54 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:48:26 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ int			char_format(int c, t_flag_data *flags);
 int			str_format(char *s, t_flag_data *flags);
 int			ptr_format(void *ptr, t_flag_data *flags);
 int			nbr_format(int i, t_flag_data *flags);
+int			unsigned_format(unsigned int u, t_flag_data *flags);
+void		ft_putunbr_fd(unsigned int n, int fd);
 
 #endif

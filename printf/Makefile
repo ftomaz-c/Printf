@@ -6,7 +6,7 @@
 #    By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 12:25:40 by ftomaz-c          #+#    #+#              #
-#    Updated: 2023/05/10 19:31:44 by ftomaz-c         ###   ########.fr        #
+#    Updated: 2023/05/11 15:59:33 by ftomaz-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ NAME = libftprintf.a
 
 CFLAGS = -Wall -Wextra -Werror -Ilibft
 
-SRC =	ft_printf.c			flag_check.c			flag_width.c		\
-		flag_precision.c	flag_alternative.c		format_specifier.c	\
-		format_char.c		format_str.c			format_ptr.c		\
-		format_nbr.c		\
+SRC =	ft_printf.c			flag_check.c		flag_width.c		\
+		flag_precision.c	flag_alternative.c	format_specifier.c	\
+		format_char.c		format_str.c		format_ptr.c		\
+		format_nbr.c		format_unsg.c		format_mod.c		\
 
 OBJ = $(SRC:.c=.o)
 

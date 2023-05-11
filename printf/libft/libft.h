@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 13:18:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/09 17:04:33 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:39:45 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <unistd.h>
+# include <limits.h>
 
 /* ctype.h */
 int		ft_isalpha(int c);

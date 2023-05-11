@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include <limits.h>
 
 /* int main()
 {
@@ -44,17 +45,15 @@
 
 int	main()
 {
-	int	len;
-	int	i;
+	int		len;
 
-	i = 0;
 	ft_printf("\n\n\n\nTesting ft_printf:\n\n");
-	len = ft_printf("% i|\n", i);
-	printf ("Length: %d\n", len);
+	len = ft_printf(" %u ", LONG_MIN);
+	printf ("\nLength: %d\n", len);
 	printf ("\n-------------------------\n");
 	printf("\nTesting printf:\n\n");
-	len = printf("% i|\n", i);
-	printf("Length: %d\n\n", len);
+	len = printf(" %u ", LONG_MIN);
+	printf("\nLength: %d\n\n", len);
 
 	return (0);
 }
