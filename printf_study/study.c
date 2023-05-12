@@ -6,15 +6,15 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:33:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/08 22:22:06 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:07:46 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int main (void)
+/* int main (void)
 {
-/* 	printf ("\nConversions: \n\n\t%%[flags][width][.precision]spercifier \n\n");
+ 	printf ("\nConversions: \n\n\t%%[flags][width][.precision]spercifier \n\n");
 
 	printf("Specifiers: \n\n");
 	char c = 'A';
@@ -43,15 +43,17 @@ int main (void)
 
 	printf("%%%% Prints a percent sign: %% \n");
 
-	printf("\nBonus: \n\n"); */
+	printf("\nBonus: \n\n");
 
 	float d = 0.1;
 //	char c[] = "Estudar";
 	printf("%%c: |%.9f| \n", d);
-/* 	printf("%%2c: |%2c| \n", c);
+ 	printf("%%2c: |%2c| \n", c);
 	printf("%%#x: %#x \n", x);
 	printf("%% d: % d \n", d);
 	printf("%%02d: %02d \n", d);
-	printf("%%+d: %+d \n", d); */
+	printf("%%+d: %+d \n", d);
 
-}
+} */
+
+

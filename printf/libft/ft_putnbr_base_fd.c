@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:58:47 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/11 17:00:29 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:24:01 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,41 +45,16 @@ int	error_check(char *base, long long base_len)
 	return (1);
 }
 
-void	ft_putnbr_base_fd(long long nbr, char *base, int fd)
+void	ft_putnbr_base_fd(unsigned long nbr, char *base, int fd)
 {
-	long long	base_len;
+	unsigned long	base_len;
 
 	base_len = 0;
 	while (base[base_len] != '\0')
 		base_len++;
-	if (base_len == 16)
-	{
-		if (nbr == 0)
-			return (ft_putstr_fd("(nil)", 1));
-		if (nbr == LONG_MIN && base_len == 16)
-			return (ft_putstr_fd("8000000000000000", 1));
-		if (nbr == (long long)ULONG_MAX && base_len == 16)
-			return (ft_putstr_fd("ffffffffffffffff", 1));
-	}
 	if (!error_check(base, base_len))
 		return ;
-	if (nbr < 0)
-	{
-		ft_putchar_fd('-', fd);
-		nbr *= -1;
-	}
 	if (nbr >= base_len)
 		ft_putnbr_base_fd(nbr / base_len, base, fd);
 	ft_putchar_fd(base[nbr % base_len], fd);
 }
-
-/* int main()
-{
-	char		*base;
-	long long	nbr;
-
-	nbr = 1993;
-	base = "0123456789abcdef";
-	ft_putstr_fd("0x", 1);
-	ft_putnbr_base_fd(nbr, base, 1);
-} */

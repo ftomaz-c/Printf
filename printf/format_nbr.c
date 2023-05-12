@@ -6,11 +6,26 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:15:00 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/11 16:23:07 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:31:36 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	nbr_len(long nbr)
+{
+	int	len;
+
+	len = 0;
+	if (nbr <= 0)
+		len++;
+	while (nbr != 0)
+	{
+		nbr /= 10;
+		len++;
+	}
+	return (len);
+}
 
 static void	nbr_minus_zero_flags(int i, char *p, int wdth, t_flag_data *flags)
 {
@@ -21,19 +36,19 @@ static void	nbr_minus_zero_flags(int i, char *p, int wdth, t_flag_data *flags)
 	}
 	if (flags->minus_flag && !flags->zero_flag)
 	{
-		ft_putnbr_base_fd(i, "0123456789", 1);
+		ft_putnbr_fd(i, 1);
 		ft_putstr_fd(p, 1);
 	}
 	else if (!flags->minus_flag && flags->zero_flag)
 	{
 		ft_memset(p, '0', wdth);
 		ft_putstr_fd(p, 1);
-		ft_putnbr_base_fd(i, "0123456789", 1);
+		ft_putnbr_fd(i, 1);
 	}
 	else if (!flags->minus_flag && !flags->zero_flag)
 	{
 		ft_putstr_fd(p, 1);
-		ft_putnbr_base_fd(i, "0123456789", 1);
+		ft_putnbr_fd(i, 1);
 	}
 }
 
@@ -82,29 +97,29 @@ static void	nbr_plus_space_flags(int i, char *p, int wdth, t_flag_data *flags)
 	}
 }
 
-int	nbr_format(int i, t_flag_data *flags)
+int	nbr_format(int nbr, t_flag_data *flags)
 {
 	char	*ptr;
 	int		len;
 	int		width;
 
-	len = nbr_base_len("0123456789", i);
+	len = nbr_len(nbr);
 	width = flags->width_flag - len;
 	if (width > 0)
 		ptr = is_width_flag(width);
 	if ((flags->plus_flag || flags->space_flag) && (width - 1 > 0 || width < 0))
 	{
-		nbr_plus_space_flags(i, ptr, width, flags);
+		nbr_plus_space_flags(nbr, ptr, width, flags);
 		width--;
 		len++;
 	}
 	if (width > 0)
 	{
-		nbr_minus_zero_flags(i, ptr, width, flags);
+		nbr_minus_zero_flags(nbr, ptr, width, flags);
 		len += width;
 		free(ptr);
 	}
 	else
-		ft_putnbr_base_fd(i, "0123456789", 1);
+		ft_putnbr_fd(nbr, 1);
 	return (len);
 }

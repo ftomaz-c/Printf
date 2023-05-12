@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_hex.c                                       :+:      :+:    :+:   */
+/*   format_hex2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:56:47 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/12 15:51:48 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:57:01 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	nbr_base_lenx(char *base, unsigned long nbr)
+static int	nbr_base_lenx(char *base, unsigned long long nbr)
 {
 	int	len;
 	int	base_len;
@@ -38,19 +38,19 @@ static void	nbr_minus_zero_flags(int hex, char *p, int wdth, t_flag_data *flags)
 	}
 	if (flags->minus_flag && !flags->zero_flag)
 	{
-		ft_putnbr_base_fd(hex, "0123456789abcdef", 1);
+		ft_putnbr_base_fd(hex, "0123456789ABCDEF", 1);
 		ft_putstr_fd(p, 1);
 	}
 	else if (!flags->minus_flag && flags->zero_flag)
 	{
 		ft_memset(p, '0', wdth);
 		ft_putstr_fd(p, 1);
-		ft_putnbr_base_fd(hex, "0123456789abcdef", 1);
+		ft_putnbr_base_fd(hex, "0123456789ABCDEF", 1);
 	}
 	else if (!flags->minus_flag && !flags->zero_flag)
 	{
 		ft_putstr_fd(p, 1);
-		ft_putnbr_base_fd(hex, "0123456789abcdef", 1);
+		ft_putnbr_base_fd(hex, "0123456789ABCDEF", 1);
 	}
 }
 
@@ -99,13 +99,13 @@ static void	nbr_plus_space_flags(int hex, char *p, int wdth, t_flag_data *flags)
 	}
 }
 
-int	hex_formatx(unsigned int hex, t_flag_data *flags)
+int	hex_format_upx(unsigned int hex, t_flag_data *flags)
 {
 	char	*ptr;
 	int		len;
 	int		width;
 
-	len = nbr_base_lenx("0123456789abcdef", hex);
+	len = nbr_base_lenx("0123456789ABCDEF", hex);
 	width = flags->width_flag - len;
 	if (width > 0)
 		ptr = is_width_flag(width);
@@ -122,6 +122,6 @@ int	hex_formatx(unsigned int hex, t_flag_data *flags)
 		free(ptr);
 	}
 	else
-		ft_putnbr_base_fd(hex, "0123456789abcdef", 1);
+		ft_putnbr_base_fd(hex, "0123456789ABCDEF", 1);
 	return (len);
 }

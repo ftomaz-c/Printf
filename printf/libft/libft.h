@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 13:18:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/11 15:39:45 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:02:42 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putnstr_fd(char *s, int n, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-void	ft_putnbr_base_fd(long long nbr, char *base, int fd);
+void	ft_putnbr_base_fd(unsigned long nbr, char *base, int fd);
 
 /* bonus */
 typedef struct s_list

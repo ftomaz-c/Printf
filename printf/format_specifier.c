@@ -6,19 +6,11 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:21:08 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/11 16:32:24 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:33:18 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char	is_placeholder(const char *format)
-{
-	if (*format == 'c' || *format == 's' || *format == 'p' || *format == 'd'
-		|| *format == 'i' || *format == 'u' || *format == 'x' || *format == 'X')
-		return (1);
-	return (0);
-}
 
 int	format_spec(const char *format, va_list args, t_flag_data *flags)
 {
@@ -70,11 +62,11 @@ int	format_spec(const char *format, va_list args, t_flag_data *flags)
 		hex = va_arg(args, int);
 		len = hex_formatx(hex, flags);
 	}
-	/* if (*format == 'X')
+	if (*format == 'X')
 	{
-		hex = va_arg(args, int);
-		len = hex_formatX(hex, flags);
-	} */
+		hex = va_arg(args, unsigned int);
+		len = hex_format_upx(hex, flags);
+	}
 	va_end(args);
 	return (len);
 }
