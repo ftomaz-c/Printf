@@ -6,13 +6,13 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:08:13 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/14 16:39:20 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:55:18 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	str_format(char *s, t_flag_data *flags)
+int	str_format(char *s, t_flags *flags)
 {
 	int		len;
 	int		width;

@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:52:54 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/14 14:44:35 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:51:34 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 #include "ft_printf.h"
 
-static void	flag_check1(const char *format, t_flag_data *flags)
+static void	flag_check1(const char *format, t_flags *flags)
 {
 	if (*format == '-')
 	{
@@ -50,7 +50,7 @@ static void	flag_check1(const char *format, t_flag_data *flags)
 	}
 }
 
-static void	flag_check2(const char *format, t_flag_data *flags)
+static void	flag_check2(const char *format, t_flags *flags)
 {
 	if (*format == '#')
 	{
@@ -75,11 +75,11 @@ static void	flag_check2(const char *format, t_flag_data *flags)
 	}
 }
 
-t_flag_data	*flag_check(const char *format)
+t_flags	*flag_check(const char *format)
 {
-	t_flag_data	*flags;
+	t_flags	*flags;
 
-	flags = ft_calloc(1, sizeof(t_flag_data));
+	flags = ft_calloc(1, sizeof(t_flags));
 	if (!flags || !format)
 		return (NULL);
 	if (*format == '%')

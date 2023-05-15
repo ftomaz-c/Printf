@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/14 17:07:13 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:27:48 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ necessary.
 
 #include "ft_printf.h"
 
-static char	is_placeholder(const char *format)
+static int	printf_putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
+static int	is_placeholder(const char *format)
 {
 	if (*format == 'c' || *format == 's' || *format == 'p' || *format == 'd'
 		|| *format == 'i' || *format == 'u' || *format == 'x' || *format == 'X')
@@ -37,14 +42,17 @@ static char	is_placeholder(const char *format)
 	return (0);
 }
 
-/* static void	not_pholder(int len, const char *format, va_list args, t_flag_data *flags)
+static int	is_flag(const char *format)
 {
-
+	if (*format == '-' || *format == '0' || *format == ft_isdigit(*format) || *format == '.'
+		|| *format == '#' || *format == ' ' || *format == '+')
+		return (1);
+	return (0);
 }
- */
+
 int	ft_printf(const char *format, ...)
 {
-	t_flag_data	*flags;
+	t_flags	*flags;
 	int			len;
 	va_list		args;
 
@@ -54,39 +62,34 @@ int	ft_printf(const char *format, ...)
 	va_start (args, format);
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) == '%')
+		if (*format == '%')
 		{
-			ft_putchar_fd('%', 1);
-			len++;
 			format++;
-		}
-		else if (*format == '%' && *(format + 1) != '%')
-		{
-			if (is_placeholder(format))
-				len += format_spec(format, args, flags);
-			if (!is_placeholder(format))
+			if (*format == '%')
+				len += printf_putchar('%');
+			if (is_flag(format))
 			{
 				flags = flag_check(format);
-				/* printf("\n\n> width flag\t\t: %d\n", flags->width_flag);
+				while (*format && !is_placeholder(format))
+					format++;
+				len += format_spec(format, args, flags);
+				free (flags);
+			}
+			if (is_placeholder(format))
+				len += format_spec(format, args, flags);
+		}
+		else if (!(*format == '%'))
+			len += printf_putchar(*format);
+		format++;
+	}
+	va_end(args);
+	return (len);
+}
+
+/* printf("\n\n> width flag\t\t: %d\n", flags->width_flag);
 				printf("> minus flag\t\t: %d\n", flags->minus_flag);
 				printf("> precision flag\t: %d\n", flags->precision_flag);
 				printf("> zero flag\t\t: %d\n", flags->zero_flag);
 				printf("> alternative_form flag\t: %d\n", flags->alternative_form);
 				printf("> space flag\t\t: %d\n", flags->space_flag);
 				printf("> plus flag\t\t: %d\n\n", flags->plus_flag); */
-				while (*format && !is_placeholder(format))
-					format++;
-				len += format_spec(format, args, flags);
-				free (flags);
-			}
-		}
-		else if (!(*format == '%'))
-		{
-			ft_putchar_fd(*format, 1);
-			len++;
-		}
-		format++;
-	}
-	va_end(args);
-	return (len);
-}

@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:36:47 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/14 17:51:11 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/15 12:48:53 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ptr_len(char *base, unsigned long long nbr)
 	len = 0;
 	base_len = ft_strlen(base);
 	if (nbr == 0)
-		len+= 5;
+		len += 5;
 	while (nbr != 0)
 	{
 		nbr /= base_len;

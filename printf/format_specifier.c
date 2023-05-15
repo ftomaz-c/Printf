@@ -6,13 +6,13 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 17:21:08 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/12 16:33:18 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:18:46 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	format_spec(const char *format, va_list args, t_flag_data *flags)
+int	format_spec(const char *format, va_list args, t_flags *flags)
 {
 	int				len;
 	char			c;
@@ -21,9 +21,7 @@ int	format_spec(const char *format, va_list args, t_flag_data *flags)
 	int				nbr;
 	unsigned int	u;
 	int				hex;
-/*	char			placeholder = *format;
- 	printf("---- placeholder: %%%c ----\n\n", placeholder);
- */
+
 	len = 0;
 	/*void error check	(format, args, flags) */
 	if (*format == 'c' )

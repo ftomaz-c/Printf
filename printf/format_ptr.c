@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:03:05 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/14 17:51:18 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:55:04 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	width_ptr_flag(char *p, long long address_value, int minus_flag)
 	}
 }
 
-int	ptr_format(void *ptr, t_flag_data *flags)
+int	ptr_format(void *ptr, t_flags *flags)
 {
 	char				*p;
 	int					len;
