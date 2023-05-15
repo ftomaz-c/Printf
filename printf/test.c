@@ -48,12 +48,12 @@ int	main()
 	int		len;
 
 	ft_printf("\n\n\n\nTesting ft_printf:\n\n");
-	len = ft_printf("%5%");
+	len = ft_printf(" %X ", -1);
 	printf ("\nLength: %d\n", len);
 	printf ("\n-------------------------\n");
-/* 	printf("\nTesting printf:\n\n");
-	len = printf("%5%");
-	printf("\nLength: %d\n\n", len); */
+ 	printf("\nTesting printf:\n\n");
+	len = printf(" %#X ", -1);
+	printf("\nLength: %d\n\n", len);
 
 	return (0);
 }

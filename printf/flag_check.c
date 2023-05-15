@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 11:52:54 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/10 21:19:05 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 14:44:35 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static void	flag_check1(const char *format, t_flag_data *flags)
 	{
 		flags->precision_flag = precision_flag(format);
 		format++;
-		while (*format > '0' && *format < '9' && *format == '.')
+		while (*format > '0' && *format < '9')
 			format++;
 	}
-	if (*format >= '1' && *format <= '9')
+  	if (*format >= '1' && *format <= '9')
 	{
 		flags->width_flag = width_flag(format);
 		while (*format >= '0' && *format <= '9')

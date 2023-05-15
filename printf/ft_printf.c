@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/12 16:42:49 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:07:13 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ int	ft_printf(const char *format, ...)
 			if (!is_placeholder(format))
 			{
 				flags = flag_check(format);
+				/* printf("\n\n> width flag\t\t: %d\n", flags->width_flag);
+				printf("> minus flag\t\t: %d\n", flags->minus_flag);
+				printf("> precision flag\t: %d\n", flags->precision_flag);
+				printf("> zero flag\t\t: %d\n", flags->zero_flag);
+				printf("> alternative_form flag\t: %d\n", flags->alternative_form);
+				printf("> space flag\t\t: %d\n", flags->space_flag);
+				printf("> plus flag\t\t: %d\n\n", flags->plus_flag); */
 				while (*format && !is_placeholder(format))
 					format++;
 				len += format_spec(format, args, flags);
@@ -83,11 +90,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
-
-/* 			printf("\n\n> width flag\t\t: %d\n", flags->width_flag);
-			printf("> minus flag\t\t: %d\n", flags->minus_flag);
-			printf("> precision flag\t: %d\n", flags->precision_flag);
-			printf("> zero flag\t\t: %d\n", flags->zero_flag);
-			printf("> alternative_form flag\t: %d\n", flags->alternative_form);
-			printf("> space flag\t\t: %d\n", flags->space_flag);
-			printf("> plus flag\t\t: %d\n\n", flags->plus_flag); */

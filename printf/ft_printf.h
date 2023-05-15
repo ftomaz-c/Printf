@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 12:19:43 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/12 16:42:34 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:49:33 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,17 @@ int			format_spec(const char *format, va_list args, t_flag_data *flags);
 int			char_format(int c, t_flag_data *flags);
 int			str_format(char *s, t_flag_data *flags);
 int			ptr_format(void *ptr, t_flag_data *flags);
-int			nbr_format(int nbr, t_flag_data *flags);
+int			nbr_format(long long nbr, t_flag_data *flags);
 int			unsigned_format(unsigned int u, t_flag_data *flags);
 void		ft_putunbr_fd(unsigned int n, int fd);
 int			hex_formatx(unsigned int hex, t_flag_data *flags);
 int			hex_format_upx(unsigned int hex, t_flag_data *flags);
+
+/* formating len */
+int			str_len(char *s, int len);
+int			nbr_len(long long nbr);
+int			ptr_len(char *base, unsigned long long nbr);
+int			nbr_base_len(char *base, unsigned long long nbr);
+
 
 #endif

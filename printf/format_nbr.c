@@ -6,26 +6,11 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:15:00 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/12 15:31:36 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:47:01 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static int	nbr_len(long nbr)
-{
-	int	len;
-
-	len = 0;
-	if (nbr <= 0)
-		len++;
-	while (nbr != 0)
-	{
-		nbr /= 10;
-		len++;
-	}
-	return (len);
-}
 
 static void	nbr_minus_zero_flags(int i, char *p, int wdth, t_flag_data *flags)
 {
@@ -97,12 +82,25 @@ static void	nbr_plus_space_flags(int i, char *p, int wdth, t_flag_data *flags)
 	}
 }
 
-int	nbr_format(int nbr, t_flag_data *flags)
+static void	nbr_precision(int nbr, t_flag_data *flags)
+{
+	if (flags->precision_flag)
+	{
+		flags->zero_flag = 1;
+		if (nbr >= 0)
+			flags->width_flag = flags->precision_flag;
+		if (nbr < 0)
+			flags->width_flag = flags->precision_flag + 1;
+	}
+}
+
+int	nbr_format(long long nbr, t_flag_data *flags)
 {
 	char	*ptr;
 	int		len;
 	int		width;
 
+	nbr_precision(nbr, flags);
 	len = nbr_len(nbr);
 	width = flags->width_flag - len;
 	if (width > 0)

@@ -6,36 +6,14 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:56:47 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/12 15:57:01 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:32:25 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	nbr_base_lenx(char *base, unsigned long long nbr)
+static void	nbr_minus_zero_flags(unsigned int hex, char *p, int wdth, t_flag_data *flags)
 {
-	int	len;
-	int	base_len;
-
-	len = 0;
-	base_len = ft_strlen(base);
-	if (nbr == 0)
-		len++;
-	while (nbr != 0)
-	{
-		nbr /= base_len;
-		len++;
-	}
-	return (len);
-}
-
-static void	nbr_minus_zero_flags(int hex, char *p, int wdth, t_flag_data *flags)
-{
-	if (hex < 0 && flags->zero_flag)
-	{
-		ft_putchar_fd('-', 1);
-		hex *= -1;
-	}
 	if (flags->minus_flag && !flags->zero_flag)
 	{
 		ft_putnbr_base_fd(hex, "0123456789ABCDEF", 1);
@@ -71,7 +49,7 @@ static void	nbr_zero_flag(char *new_ptr, char *p, int wdth, t_flag_data *flags)
 	free(new_ptr);
 }
 
-static void	nbr_plus_space_flags(int hex, char *p, int wdth, t_flag_data *flags)
+static void	nbr_plus_space_flags(unsigned int hex, char *p, int wdth, t_flag_data *flags)
 {
 	char	*new_ptr;
 
@@ -85,7 +63,7 @@ static void	nbr_plus_space_flags(int hex, char *p, int wdth, t_flag_data *flags)
 		else if (wdth < 0)
 			ft_putchar_fd('+', 1);
 	}
-	if (flags->space_flag && wdth && hex >= 0 && !flags->plus_flag)
+	if (flags->space_flag && wdth && !flags->plus_flag)
 	{
 		if (wdth > 0)
 		{
@@ -99,13 +77,23 @@ static void	nbr_plus_space_flags(int hex, char *p, int wdth, t_flag_data *flags)
 	}
 }
 
+static void	hex_nbr_precision(t_flag_data *flags)
+{
+	if (flags->precision_flag)
+	{
+		flags->zero_flag = 1;
+		flags->width_flag = flags->precision_flag;
+	}
+}
+
 int	hex_format_upx(unsigned int hex, t_flag_data *flags)
 {
 	char	*ptr;
 	int		len;
 	int		width;
 
-	len = nbr_base_lenx("0123456789ABCDEF", hex);
+	hex_nbr_precision(flags);
+	len = nbr_base_len("0123456789ABCDEF", hex);
 	width = flags->width_flag - len;
 	if (width > 0)
 		ptr = is_width_flag(width);
