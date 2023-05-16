@@ -6,7 +6,7 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/15 17:27:48 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/16 20:13:39 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,10 @@ necessary.
 
 #include "ft_printf.h"
 
-static int	printf_putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-static int	is_placeholder(const char *format)
+static char	is_placeholder(const char *format)
 {
 	if (*format == 'c' || *format == 's' || *format == 'p' || *format == 'd'
 		|| *format == 'i' || *format == 'u' || *format == 'x' || *format == 'X')
-		return (1);
-	return (0);
-}
-
-static int	is_flag(const char *format)
-{
-	if (*format == '-' || *format == '0' || *format == ft_isdigit(*format) || *format == '.'
-		|| *format == '#' || *format == ' ' || *format == '+')
 		return (1);
 	return (0);
 }
@@ -62,12 +49,17 @@ int	ft_printf(const char *format, ...)
 	va_start (args, format);
 	while (*format)
 	{
-		if (*format == '%')
+		if (*format == '%' && *(format + 1) == '%')
 		{
+			ft_putchar_fd('%', 1);
+			len++;
 			format++;
-			if (*format == '%')
-				len += printf_putchar('%');
-			if (is_flag(format))
+		}
+		else if (*format == '%' && *(format + 1) != '%')
+		{
+			if (is_placeholder(format))
+				len += format_spec(format, args, flags);
+			if (!is_placeholder(format))
 			{
 				flags = flag_check(format);
 				while (*format && !is_placeholder(format))
@@ -75,11 +67,12 @@ int	ft_printf(const char *format, ...)
 				len += format_spec(format, args, flags);
 				free (flags);
 			}
-			if (is_placeholder(format))
-				len += format_spec(format, args, flags);
 		}
 		else if (!(*format == '%'))
-			len += printf_putchar(*format);
+		{
+			ft_putchar_fd(*format, 1);
+			len++;
+		}
 		format++;
 	}
 	va_end(args);
