@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ftomaz-c <ftomaz-c@student@42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/22 13:44:23 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/23 18:51:51 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/04/13 10:47:38 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/04/24 14:47:16 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*Outputs the character ’c’ to the given file descriptor.					*/
-/*c: The character to output.												*/
-/*fd: The file descriptor on which to write.								*/
+/*Determines the length of string excluding the ending null character.		*/
+/*Returns the length of string.												*/
 
 #include "libft.h"
 
-int	ft_putchar_fd(char c, int fd)
+size_t	ft_strlen(const char *s)
 {
-	return(write (fd, &c, 1));
+	size_t	count;
+
+	count = 0;
+	while (*s != '\0')
+	{
+		s++;
+		count++;
+	}
+	return (count);
 }

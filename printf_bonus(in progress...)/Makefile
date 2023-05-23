@@ -6,7 +6,7 @@
 #    By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 12:25:40 by ftomaz-c          #+#    #+#              #
-#    Updated: 2023/05/23 21:01:27 by ftomaz-c         ###   ########.fr        #
+#    Updated: 2023/05/15 10:16:34 by ftomaz-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,18 @@ NAME = libftprintf.a
 
 CFLAGS = -Wall -Wextra -Werror -Ilibft
 
-SRC =	ft_printf.c	format_str.c format_ptr.c format_nbr.c
+SRC =	ft_printf.c			flag_check.c		flag_width.c		\
+		flag_precision.c	format_specifier.c	format_char.c		\
+		format_str.c		format_ptr.c		format_nbr.c		\
+		format_unsg.c		format_hex.c		format_hex2.c		\
+		format_len.c							\
+
+BSRC =	flag_check.c 		flag_width.c 		flag_precision.c	\
+		format_specifier.c						\
 
 OBJ = $(SRC:.c=.o)
+
+BOBJ = $(SRC:.c=.o)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -32,6 +41,11 @@ $(NAME): $(OBJ)
 
 all: $(NAME)
 
+bonus: $(OBJ) $(BOBJ)
+	$(MAKE) -C libft
+	cp libft/libft.a $(NAME)
+	$(LIB_CMD) $(NAME) $(OBJ) $(BOBJ)
+
 clean:
 	rm -rf $(OBJ)
 	$(MAKE) -C libft clean
@@ -42,4 +56,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

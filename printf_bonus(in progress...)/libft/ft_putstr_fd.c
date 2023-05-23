@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ftomaz-c <ftomaz-c@student@42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/22 13:44:23 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/23 18:51:51 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/04/22 14:03:58 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/04/24 14:39:08 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*Outputs the character ’c’ to the given file descriptor.					*/
-/*c: The character to output.												*/
-/*fd: The file descriptor on which to write.								*/
+/*Outputs the string ’s’ to the given file descriptor.						*/
+/*s: The string to output.													*/
+/*fd: The file descriptor on which to write. 								*/
 
 #include "libft.h"
 
-int	ft_putchar_fd(char c, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
-	return(write (fd, &c, 1));
+	while (*s != '\0')
+	{
+		ft_putchar_fd(*s, fd);
+		s++;
+	}
 }

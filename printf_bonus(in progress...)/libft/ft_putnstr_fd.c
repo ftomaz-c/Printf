@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_str.c                                       :+:      :+:    :+:   */
+/*   ft_putnstr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 18:53:48 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/23 20:13:38 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/05/09 10:11:36 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/05/09 12:22:30 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int format_str(char *str)
+void	ft_putnstr_fd(char *s, int n, int fd)
 {
-    int len;
+	int	i;
 
-    if (!str)
-    {
-        ft_putstr_fd("(null)", 1);
-        return(6);
-    }
-    len = ft_strlen(str);
-    ft_putstr_fd(str, 1);
-    return (len);
+	i = 0;
+	while (i < n && *s)
+	{
+		ft_putchar_fd(*s, fd);
+		i++;
+		s++;
+	}
 }

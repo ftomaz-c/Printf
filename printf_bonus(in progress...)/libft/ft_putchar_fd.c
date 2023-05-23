@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_str.c                                       :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 18:53:48 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/23 20:13:38 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/04/22 13:44:23 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/05/15 15:09:24 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+/*Outputs the character ’c’ to the given file descriptor.					*/
+/*c: The character to output.												*/
+/*fd: The file descriptor on which to write.								*/
 
-int format_str(char *str)
+#include "libft.h"
+
+void	ft_putchar_fd(char c, int fd)
 {
-    int len;
-
-    if (!str)
-    {
-        ft_putstr_fd("(null)", 1);
-        return(6);
-    }
-    len = ft_strlen(str);
-    ft_putstr_fd(str, 1);
-    return (len);
+	write (fd, &c, 1);
 }

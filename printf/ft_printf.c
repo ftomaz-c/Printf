@@ -5,84 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 16:49:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/16 20:13:39 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/05/23 18:02:19 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/05/23 21:01:36 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-1. Iterate through the input until a % sign appears. Write everything
-encountered before that point.
-2. Once a % sign is found, check if there are any flags present.
-3. If a flag is found, handle it accordingly by performing the required
-action or modification.
-4. Check if there are subsequent flags that may cancel or modify the effect
-of the previous flag. Adjust the behavior based on these flags if necessary.
-5. For specific flags (e.g., -), check if there are additional parameters
-(such as a number) following the flag. Use these parameters to determine the
-behavior of the flag.
-6. Once all flags have been processed, identify and handle the placeholder.
-7.Continue iterating through the input to check if there are any more
-occurrences of % signs with flags and placeholders. Repeat steps 2-6 as
-necessary.
-*/
-
 #include "ft_printf.h"
 
-static char	is_placeholder(const char *format)
+int ft_parse(const char *format, va_list args)
 {
-	if (*format == 'c' || *format == 's' || *format == 'p' || *format == 'd'
-		|| *format == 'i' || *format == 'u' || *format == 'x' || *format == 'X')
-		return (1);
+	if (*format == 'c')
+		return (ft_putchar_fd(va_arg(args, int), 1));
+	if (*format == 's')
+		return (format_str(va_arg(args, char *)));
+	if (*format == 'p')
+		return (format_ptr(va_arg(args, void *)));
+	if (*format == 'd' || *format == 'i')
+		return (format_nbr(va_arg(args, int)));
+	/*if (*format == 'u')
+		return (format_uns(va_arg(args, unsigned int)));
+	if (*format == 'x' || *format == 'X')
+		return (format_hex(va_arg(args, int)));*/
+	if (*format == '%')
+		return (ft_putchar_fd('%', 1));
 	return (0);
 }
 
-int	ft_printf(const char *format, ...)
+int ft_printf(const char *format, ...)
 {
-	t_flags	*flags;
-	int			len;
+    int			count;
 	va_list		args;
 
-	len = 0;
-	if (!format)
-		return (len);
-	va_start (args, format);
+    if (!format)
+		return (0);
+	count = 0;
+	va_start(args, format);
 	while (*format)
 	{
-		if (*format == '%' && *(format + 1) == '%')
-		{
-			ft_putchar_fd('%', 1);
-			len++;
-			format++;
-		}
-		else if (*format == '%' && *(format + 1) != '%')
-		{
-			if (is_placeholder(format))
-				len += format_spec(format, args, flags);
-			if (!is_placeholder(format))
-			{
-				flags = flag_check(format);
-				while (*format && !is_placeholder(format))
-					format++;
-				len += format_spec(format, args, flags);
-				free (flags);
-			}
-		}
-		else if (!(*format == '%'))
-		{
-			ft_putchar_fd(*format, 1);
-			len++;
-		}
+		if (*format == '%')
+			count += ft_parse(++format, args);
+		else if (*format != '%')
+       		count += ft_putchar_fd(*format, 1);
 		format++;
 	}
 	va_end(args);
-	return (len);
+    return (count);    
 }
-
-/* printf("\n\n> width flag\t\t: %d\n", flags->width_flag);
-				printf("> minus flag\t\t: %d\n", flags->minus_flag);
-				printf("> precision flag\t: %d\n", flags->precision_flag);
-				printf("> zero flag\t\t: %d\n", flags->zero_flag);
-				printf("> alternative_form flag\t: %d\n", flags->alternative_form);
-				printf("> space flag\t\t: %d\n", flags->space_flag);
-				printf("> plus flag\t\t: %d\n\n", flags->plus_flag); */

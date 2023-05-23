@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_str.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ftomaz-c <ftomaz-c@student@42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 18:53:48 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/23 20:13:38 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/04/22 19:35:07 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/04/24 14:26:59 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+/*Returns the last node of the list.										*/
+/*lst: The beginning of the list.											*/
 
-int format_str(char *str)
+#include "libft.h"
+
+t_list	*ft_lstlast(t_list *lst)
 {
-    int len;
-
-    if (!str)
-    {
-        ft_putstr_fd("(null)", 1);
-        return(6);
-    }
-    len = ft_strlen(str);
-    ft_putstr_fd(str, 1);
-    return (len);
+	while (lst && lst->next)
+		lst = lst->next;
+	return (lst);
 }

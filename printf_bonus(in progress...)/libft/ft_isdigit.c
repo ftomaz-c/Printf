@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_str.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ftomaz-c <ftomaz-c@student@42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 18:53:48 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/23 20:13:38 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/04/12 12:11:51 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/04/24 14:20:29 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+/*checks if the passed character is a digit or not.							*/
+/*It returns a non-zero value if it’s a digit else it returns 0.			*/
 
-int format_str(char *str)
+#include "libft.h"
+
+int	ft_isdigit(int c)
 {
-    int len;
-
-    if (!str)
-    {
-        ft_putstr_fd("(null)", 1);
-        return(6);
-    }
-    len = ft_strlen(str);
-    ft_putstr_fd(str, 1);
-    return (len);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
