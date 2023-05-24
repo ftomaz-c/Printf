@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   nbr_format.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftomaz-c <ftomaz-c@student@42lisboa.com    +#+  +:+       +#+        */
+/*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/12 12:11:51 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/04/24 14:20:29 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/05/23 20:56:10 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/05/24 17:02:03 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*checks if the passed character is a digit or not.							*/
-/*It returns a non-zero value if it’s a digit else it returns 0.			*/
+#include "ft_printf.h"
 
-#include "libft.h"
-
-int	ft_isdigit(int c)
+int	nbr_format(int nbr)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	int	len;
+
+	len = nbr_len(nbr);
+	ft_putnbr_fd(nbr, 1);
+	return (len);
 }

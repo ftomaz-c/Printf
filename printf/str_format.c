@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   str_format.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftomaz-c <ftomaz-c@student@42lisboa.com    +#+  +:+       +#+        */
+/*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 10:22:45 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/04/24 14:20:40 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/05/23 18:53:48 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/05/24 16:19:45 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*Checks whether a character is a printable character or not. If a character*/
-/* is printable, it returns non-zero integer, if not it returns 0.			*/
+#include "ft_printf.h"
 
-#include "libft.h"
-
-int	ft_isprint(int c)
+int	str_format(char *str)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	return (0);
+	int	len;
+
+	if (!str)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
+	len = ft_strlen(str);
+	ft_putstr_fd(str, 1);
+	return (len);
 }

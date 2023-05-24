@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnstr_fd.c                                    :+:      :+:    :+:   */
+/*   hex_format.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 10:11:36 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/09 12:22:30 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/05/24 15:47:44 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/05/24 16:19:41 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putnstr_fd(char *s, int n, int fd)
+int	hex_format(unsigned int hex, const char *format)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (i < n && *s)
-	{
-		ft_putchar_fd(*s, fd);
-		i++;
-		s++;
-	}
+	len = hex_len(hex);
+	if (*format == 'x')
+		ft_putnbr_base_fd(hex, "0123456789abcdef", 1);
+	else if (*format == 'X')
+		ft_putnbr_base_fd(hex, "0123456789ABCDEF", 1);
+	return (len);
 }

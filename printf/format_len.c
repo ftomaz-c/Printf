@@ -1,27 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_str.c                                       :+:      :+:    :+:   */
+/*   format_len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 18:53:48 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/23 20:13:38 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/05/24 15:25:35 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/05/24 16:12:04 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int format_str(char *str)
+int	nbr_len(long nbr)
 {
-    int len;
+	int	len;
 
-    if (!str)
-    {
-        ft_putstr_fd("(null)", 1);
-        return(6);
-    }
-    len = ft_strlen(str);
-    ft_putstr_fd(str, 1);
-    return (len);
+	len = 0;
+	if (nbr <= 0)
+		len++;
+	while (nbr != 0)
+	{
+		nbr /= 10;
+		len++;
+	}
+	return (len);
+}
+
+int	ptr_len(unsigned long nbr)
+{
+	int	len;
+
+	len = 0;
+	if (nbr == 0)
+		len += 5;
+	while (nbr != 0)
+	{
+		nbr /= 16;
+		len++;
+	}
+	return (len);
+}
+
+int	hex_len(unsigned int nbr)
+{
+	int	len;
+
+	len = 0;
+	if (nbr == 0)
+		len++;
+	while (nbr != 0)
+	{
+		nbr /= 16;
+		len++;
+	}
+	return (len);
 }

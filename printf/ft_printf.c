@@ -6,37 +6,37 @@
 /*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 18:02:19 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/05/23 21:01:36 by ftomaz-c         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:23:36 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_parse(const char *format, va_list args)
+int	ft_parse(const char *format, va_list args)
 {
 	if (*format == 'c')
 		return (ft_putchar_fd(va_arg(args, int), 1));
 	if (*format == 's')
-		return (format_str(va_arg(args, char *)));
+		return (str_format(va_arg(args, char *)));
 	if (*format == 'p')
-		return (format_ptr(va_arg(args, void *)));
+		return (ptr_format(va_arg(args, void *)));
 	if (*format == 'd' || *format == 'i')
-		return (format_nbr(va_arg(args, int)));
-	/*if (*format == 'u')
-		return (format_uns(va_arg(args, unsigned int)));
+		return (nbr_format(va_arg(args, int)));
+	if (*format == 'u')
+		return (unsg_format(va_arg(args, unsigned int)));
 	if (*format == 'x' || *format == 'X')
-		return (format_hex(va_arg(args, int)));*/
+		return (hex_format(va_arg(args, int), format));
 	if (*format == '%')
 		return (ft_putchar_fd('%', 1));
 	return (0);
 }
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-    int			count;
+	int			count;
 	va_list		args;
 
-    if (!format)
+	if (!format)
 		return (0);
 	count = 0;
 	va_start(args, format);
@@ -45,9 +45,9 @@ int ft_printf(const char *format, ...)
 		if (*format == '%')
 			count += ft_parse(++format, args);
 		else if (*format != '%')
-       		count += ft_putchar_fd(*format, 1);
+			count += ft_putchar_fd(*format, 1);
 		format++;
 	}
 	va_end(args);
-    return (count);    
+	return (count);
 }

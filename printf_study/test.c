@@ -48,11 +48,11 @@ int	main()
 	int		len;
 
 	ft_printf("\n\n\n\nTesting ft_printf:\n\n");
-	len = ft_printf(" %d ", 10);
+	len = ft_printf(" %x ", -9);
 	printf ("\nLength: %d\n", len);
 	printf ("\n-------------------------\n");
  	printf("\nTesting printf:\n\n");
-	len = printf(" %d ", 10);
+	len = printf(" %x ", -9);
 	printf("\nLength: %d\n\n", len);
 
 	return (0);

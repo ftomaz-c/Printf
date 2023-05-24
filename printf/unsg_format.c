@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   unsg_format.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftomaz-c <ftomaz-c@student@42lisboa.com    +#+  +:+       +#+        */
+/*   By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/22 19:35:07 by ftomaz-c          #+#    #+#             */
-/*   Updated: 2023/04/24 14:26:59 by ftomaz-c         ###   ########.fr       */
+/*   Created: 2023/05/24 15:23:09 by ftomaz-c          #+#    #+#             */
+/*   Updated: 2023/05/24 16:19:43 by ftomaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*Returns the last node of the list.										*/
-/*lst: The beginning of the list.											*/
+#include "ft_printf.h"
 
-#include "libft.h"
-
-t_list	*ft_lstlast(t_list *lst)
+int	unsg_format(unsigned int nbr)
 {
-	while (lst && lst->next)
-		lst = lst->next;
-	return (lst);
+	int	len;
+
+	len = nbr_len(nbr);
+	ft_putnbr_fd(nbr, 1);
+	return (len);
 }
