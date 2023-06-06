@@ -6,7 +6,7 @@
 #    By: ftomaz-c <ftomaz-c@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 12:25:40 by ftomaz-c          #+#    #+#              #
-#    Updated: 2023/05/24 16:22:56 by ftomaz-c         ###   ########.fr        #
+#    Updated: 2023/05/26 12:45:14 by ftomaz-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIB_CMD = ar -rcs
 
 NAME = libftprintf.a
 
-CFLAGS = -Wall -Wextra -Werror -Ilibft
+CFLAGS = -Wall -Wextra -Werror -I.
 
 SRC =	ft_printf.c		str_format.c	format_len.c	ptr_format.c	\
 		nbr_format.c	unsg_format.c	hex_format.c					\
